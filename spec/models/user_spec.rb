@@ -4,15 +4,16 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
-  describe 'ユーザー新規登録' do
-     context '新規登録がうまくいくとき' do	
-    it "内容に問題がない" do	
-      expect(@user).to be_valid	
-    end	
-  end	
-  
 
-  context '新規登録がうまくいかないとき' do
+
+  describe 'ユーザー新規登録' do
+    context '新規登録がうまくいくとき' do	
+      it "内容に問題がない" do	
+       expect(@user).to be_valid	
+      end	
+    end	
+
+    context '新規登録がうまくいかないとき' do
 
     it "nicknameが空だと登録できない" do
       @user.nickname = ""  
@@ -34,7 +35,7 @@ RSpec.describe User, type: :model do
     end
 
     it "emailの一意性でなければでは登録できない" do 
-      @user.email = "sa@sa"  	
+      @user.email = ""  	
       @user.valid?	
       expect(@user.errors.full_messages).to include "Email can't be blank"
     end
@@ -136,5 +137,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-end
-
