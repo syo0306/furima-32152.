@@ -28,6 +28,12 @@ RSpec.describe User, type: :model do
     end
 
     it "emailの@がなければでは登録できない" do 
+      user.email = "saco.jp"  
+      user.valid?
+      expect(user.errors.full_messages).to include "Email can't be blank"
+    end
+
+    it "emailの一意性でなければでは登録できない" do 
       user.email = "sa@sa"  
       user.valid?
       expect(user.errors.full_messages).to include "Email can't be blank"
@@ -40,19 +46,31 @@ RSpec.describe User, type: :model do
     end
 
     it "passwordが全角英数字混合では登録できない" do
-      user.password = "MA1"  
+      user.password = "１２３XYZ"  
+      user.valid?
+      expect(user.errors.full_messages).to include "Password can't be blank"
+    end
+
+    it "passwordが5文字では登録できない" do
+      user.password = "12abc"  
+      user.valid?
+      expect(user.errors.full_messages).to include "Password can't be blank"
+    end
+
+    t "passwordがパスワードとパスワード（確認用）、値の一致していない時登録できない" do
+      user.password = "123abc", "213abc"
       user.valid?
       expect(user.errors.full_messages).to include "Password can't be blank"
     end
 
     it "passwordが半角英字のみの場合登録できない" do
-      user.password = "abc"  
+      user.password = "abcdef"  
       user.valid?
       expect(user.errors.full_messages).to include "Password can't be blank"
     end
 
     it "passwordが半角数字のみの場合登録できない" do
-      user.password = "123"  
+      user.password = "123456"  
       user.valid?
       expect(user.errors.full_messages).to include "Password can't be blank"
     end
