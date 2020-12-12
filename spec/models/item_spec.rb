@@ -35,31 +35,31 @@ RSpec.describe Item, type: :model do
     it "カテゴリー情報がないと登録できない" do
       @item.category_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Category can't be blank")
+      expect(@item.errors.full_messages).to include("Category must be other than 1")
     end
 
     it "商品状態の情報がないと登録できない" do
       @item.status_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Status can't be blank")
+      expect(@item.errors.full_messages).to include("Status must be other than 1")
     end
 
     it "送料負担の情報がないと登録できない" do
       @item.item_postage_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Item postage can't be blank")
+      expect(@item.errors.full_messages).to include("Item postage must be other than 1")
     end
 
     it "発送元の地域の情報がないと登録できない" do
       @item.area_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Area can't be blank")
+      expect(@item.errors.full_messages).to include("Area must be other than 1")
     end
 
     it "配送までの日付の情報がないと登録できない" do
       @item.day_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Day can't be blank")
+      expect(@item.errors.full_messages).to include("Day must be other than 1")
     end
 
     it "価格の情報がないと登録できない" do
