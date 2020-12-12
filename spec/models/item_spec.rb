@@ -62,9 +62,16 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Item price can't be blank")
     end
 
-    it "価格の範囲が、¥300~¥9,999,999の間でないと登録できない" do
-      @item.item_price = "¥10,¥10,000,000"
+    it "価格のが、300円以上でないと登録できない" do
+      @item.item_price = "¥10"
       @item.valid?
+      expect(@item.errors.full_messages).to include("Item price is out of setting range")
+    end
+
+    it "価格が、10,000,000円以上では登録ができない" do
+      @item.item_price = "10,000,000"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Item price is out of setting range")
     end
 
     it "価格が半角数字ないと登録できない" do
