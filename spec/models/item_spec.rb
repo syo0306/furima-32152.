@@ -9,8 +9,7 @@ RSpec.describe Item, type: :model do
   describe '商品出品登録' do
     context '商品出品登録がうまくいくとき' do	
       it "商品名が登録できてる時" do
-        @item.name = "aあ"
-        @item.valid?
+        @item.name = "aあア"
       end	
     end	
 
@@ -60,6 +59,7 @@ RSpec.describe Item, type: :model do
     it "価格の情報がないと登録できない" do
       @item.item_price = nil
       @item.valid?
+      expect(@item.errors.full_messages).to include("Item price can't be blank")
     end
 
     it "価格の範囲が、¥300~¥9,999,999の間でないと登録できない" do
