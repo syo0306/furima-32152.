@@ -8,12 +8,17 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品登録' do
     context '商品出品登録がうまくいくとき' do	
-      it "商品名が登録できてる時" do
-        @item.name = "aあア"
+      it "全ての値が存在するときに保存できる" do
       end	
     end	
 
     context '商品出品登録がうまくいかないとき' do
+
+    it "画像が空では保存できない" do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("User must exist")
+    end
 
     it "商品名が空だと登録できない" do
       @item.name = nil
@@ -42,6 +47,7 @@ RSpec.describe Item, type: :model do
     it "送料負担の情報がないと登録できない" do
       @item.item_postage_id = nil
       @item.valid?
+      expect(@item.errors.full_messages).to include("Item postage can't be blank")
     end
 
     it "発送元の地域の情報がないと登録できない" do
@@ -63,13 +69,13 @@ RSpec.describe Item, type: :model do
     end
 
     it "価格のが、300円以上でないと登録できない" do
-      @item.item_price = "¥10"
+      @item.item_price = "10"
       @item.valid?
       expect(@item.errors.full_messages).to include("Item price is out of setting range")
     end
 
     it "価格が、10,000,000円以上では登録ができない" do
-      @item.item_price = "10,000,000"
+      @item.item_price = "10000000"
       @item.valid?
       expect(@item.errors.full_messages).to include("Item price is out of setting range")
     end
