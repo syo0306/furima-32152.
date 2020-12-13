@@ -19,7 +19,6 @@
 
 
 
-
 ## items table
 
 
@@ -27,6 +26,7 @@
 | Column                         | Type       | Options           |
 |--------------------------------|------------|-------------------|
 | name                           | string     | null: false       |
+| text                           | text       | null: false       |
 | item_price                     | integer    | null: false       |
 | category_id                    | integer    | null: false       |
 | status_id                      | integer    | null: false       |
@@ -70,7 +70,5 @@
 
 ## Association
 
-
-- belongs_to :order
 
 - belongs_to :order
