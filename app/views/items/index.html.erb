@@ -129,11 +129,11 @@
 
       <%  @items.each do |item| %>
        <li class='list'>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item) do %>
          <div class='item-img-content'>
           <%= image_tag item.image, class: 'item-img'  %>
            <% end %>
-          <% if '商品が購入済み' %>
+          <% if '商品が購入済み'%>
            <div class='sold-out'>
             <span>Sold Out!!</span>
            </div>
@@ -158,7 +158,7 @@
       <%# 商品がある場合は表示されないようにしましょう %>
       <% if @items.blank?%>
       <li class='list'>
-        <%= link_to '#' do %>
+        <%= link_to edit_item_path(@item) do %>
         <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
         <div class='item-info'>
           <h3 class='item-name'>
