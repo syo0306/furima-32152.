@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only:[:new, :create, :edit, :update]
-  before_action :set_item, only:[:show, :edit, :update]
+  before_action :set_item, only:[:show, :edit]
 
   def index
     @items = Item.order("created_at DESC")
@@ -20,9 +20,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      redirect_to user_session_path
-    end
   end
 
   def edit
@@ -30,7 +27,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-        redirect_to item_path(@prototype)
+        render edit_path
     else
       render :edit
     end
@@ -47,6 +44,7 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    redirect_to root_path unless current_user == @item.user
+    # redirect_to root_path unless current_user == @item.user
   end
+
 end
