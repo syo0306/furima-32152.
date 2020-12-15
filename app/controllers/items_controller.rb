@@ -46,8 +46,4 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  # def contributor_confirmation
-  #   edirect_to root_path unless current_user == @item.user
-  # end
-
 end
