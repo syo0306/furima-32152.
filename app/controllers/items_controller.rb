@@ -23,6 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if current_user.id != @item.user.id
+      render :show
+    end
   end
 
   def update
@@ -43,7 +46,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def contributor_confirmation
-  end
+  # def contributor_confirmation
+  #   edirect_to root_path unless current_user == @item.user
+  # end
 
 end
