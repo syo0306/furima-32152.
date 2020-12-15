@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only:[:new, :create, :edit, :update]
-  before_action :set_item, only:[:show, :edit]
+  before_action :set_item, only:[:show, :edit, :update]
 
   def index
     @items = Item.order("created_at DESC")
@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-        render edit_path
+        render :show
     else
       render :edit
     end
@@ -44,7 +44,6 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    # redirect_to root_path unless current_user == @item.user
   end
 
 end
