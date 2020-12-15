@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    unless user_signed_in?
+    if user_signed_in?
       redirect_to user_session_path
     end
   end
@@ -29,9 +29,9 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.save
-      redirect_to item_path
-    elsif
+    if @item.update(item_params)
+        redirect_to item_path(@prototype)
+    else
       render :edit
     end
   end
@@ -46,9 +46,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index
-    unless user_signed_in?
-      redirect_to action: :edit
-    end
+  def contributor_confirmation
+    redirect_to root_path unless current_user == @item.user
   end
 end
