@@ -19,8 +19,6 @@ const pay = () => {
         const token = item.id;
         const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
-        // const tokenObj = `<input value=${token} name='token'>`;
-
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
       document.getElementById("number");
