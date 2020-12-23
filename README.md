@@ -42,7 +42,7 @@
 
 
 
-## orders table
+## donations table
 
 | Column      | Type        | Options           |
 |-------------|-------------|-------------------|
@@ -56,7 +56,7 @@
 - has_one :address
 
 
-## addresses table
+## orders table
 | Column             | Type        | Options             |
 |--------------------|-------------|---------------------|
 | area_id            | integer     | null: false         |
