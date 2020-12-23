@@ -12,7 +12,6 @@ const pay = () => {
       exp_month: formData.get("exp_month"),
       exp_year: `20${formData.get("exp_year")}`,
     };
-    console.log(card);
 
     Payjp.createToken(card, (donation, item) => {
       if (donation == 200) {

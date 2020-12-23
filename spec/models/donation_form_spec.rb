@@ -27,9 +27,10 @@ RSpec.describe DonationForm, type: :model do
       expect(@donation_form.errors.full_messages).to include("Postal code can't be blank")
     end
 
-    it "郵便番号にハイフンがあると登録できない" do 
-      @donation_form.postal_code = "123-4567"
+    it "郵便番号にハイフンがないと登録できない" do 
+      @donation_form.postal_code = "1234567"
       @donation_form.valid?
+      expect(@donation_form.errors.full_messages).to include("Postal code is invalid")
     end
 
     it "都道府県がないと登録できない" do
@@ -59,11 +60,13 @@ RSpec.describe DonationForm, type: :model do
     it "電話番号にハイフンあると登録できない" do
       @donation_form.phone_number = "123-4567-8910"
       @donation_form.valid?
+      expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
     end
 
     it "電話番号が11桁以上であると登録できない" do
       @donation_form.phone_number = "123-4567-89101"
       @donation_form.valid?
+      expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
     end
   end
 end
