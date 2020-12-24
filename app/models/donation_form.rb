@@ -15,8 +15,8 @@ class DonationForm
   end
 
   def save
-    @order = Order.create(postal_code: postal_code, area_id: area_id, city: city, house_number: house_number,building: building, phone_number: phone_number, donation_id: donation_id)
-    @donation = Donation.new(item_id: item_id, user_id: user_id)
+    donation = Donation.create(item_id: item_id, user_id: user_id)
+    Order.create(postal_code: postal_code, area_id: area_id, city: city, house_number: house_number,building: building, phone_number: phone_number, donation_id: donation.id)
   end
 
 end

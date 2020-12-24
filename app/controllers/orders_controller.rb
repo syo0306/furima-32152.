@@ -12,8 +12,10 @@ class OrdersController < ApplicationController
 
   def create
     @donation_form = DonationForm.new(order_params)
+
     if @donation_form.valid?
       @donation_form.save
+      pay_item
       redirect_to root_path
     else
       render :index
@@ -23,7 +25,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:price, :postal_code, :area_id, :city, :house_number, :building, :phone_number, :item_id, :token, :donation_id).merge(user_id: current_user.id)
+    params.permit(:postal_code, :area_id, :city, :house_number, :building, :phone_number,:donation_id,:item_id, :token).merge(user_id: current_user.id)
   end
 
   def set_item
@@ -31,7 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = (process.env.PAYJP_SECRET_KEY)
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
         amount: @item.item_price,  
         card: order_params[:token], 
