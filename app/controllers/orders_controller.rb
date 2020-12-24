@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   before_action :set_item, only:[:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @donation_form = DonationForm.new
     if current_user.id == @item.user_id || @item.donation != nil
       redirect_to root_path
@@ -12,7 +11,6 @@ class OrdersController < ApplicationController
 
 
   def create
-    @item = Item.find(params[:item_id])
     @donation_form = DonationForm.new(order_params)
     if @donation_form.valid?
       @donation_form.save

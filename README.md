@@ -56,7 +56,7 @@
 - has_one :address
 
 
-## Donations table
+## orders table
 | Column             | Type        | Options             |
 |--------------------|-------------|---------------------|
 | area_id            | integer     | null: false         |
@@ -66,9 +66,9 @@
 | house_number       | string      | null: false         |
 | building           | string      |                     |
 | phone_number       | string      | null: false         |
-| order              | references  | foreign_key: true   |
+| donation           | references  | foreign_key: true   |
 
 ## Association
 
 
-- belongs_to :order
+- belongs_to :donation
