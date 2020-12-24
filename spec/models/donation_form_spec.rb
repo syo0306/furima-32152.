@@ -13,6 +13,7 @@ RSpec.describe DonationForm, type: :model do
       end	
 
       it "建物の情報が無くても保存できる" do
+        @donation_form. building = nil
         expect(@donation_form).to be_valid
       end	
     end	
@@ -46,6 +47,13 @@ RSpec.describe DonationForm, type: :model do
       expect(@donation_form.errors.full_messages).to include("Area must be other than 1")
     end
 
+    it "都道府県がないと登録できない" do
+      @donation_form.area_id = nil
+      @donation_form.valid?
+      expect(@donation_form.errors.full_messages).to include("Area can't be blank")
+    end
+
+
     it "市町村が空だと登録できない" do
       @donation_form.city = nil
       @donation_form.valid?
@@ -71,7 +79,7 @@ RSpec.describe DonationForm, type: :model do
     end
 
     it "電話番号が11桁以上であると登録できない" do
-      @donation_form.phone_number = "123-4567-89101"
+      @donation_form.phone_number = "123456789101"
       @donation_form.valid?
       expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
     end

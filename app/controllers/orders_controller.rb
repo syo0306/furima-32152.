@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
     if @donation_form.valid?
       @donation_form.save
-      pay_item
+      pay_items
       redirect_to root_path
     else
       render :index
