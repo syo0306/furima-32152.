@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @donation = Donation.all
   end
 
   def edit
