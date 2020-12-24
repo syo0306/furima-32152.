@@ -11,7 +11,14 @@ RSpec.describe DonationForm, type: :model do
       it "全ての値が存在するときに保存できる" do
         expect(@donation_form).to be_valid
       end	
+
+      it "建物の情報が無くても保存できる" do
+        expect(@donation_form).to be_valid
+      end	
     end	
+
+   
+
 
    context '商品購入登録がうまくいかないとき' do
 
@@ -67,6 +74,16 @@ RSpec.describe DonationForm, type: :model do
       @donation_form.phone_number = "123-4567-89101"
       @donation_form.valid?
       expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
+    end
+
+    it "user_idが空の場合、登録が出来ない登録できない" do
+      @donation_form.user_id = nil
+      @donation_form.valid?
+    end
+
+    it "item_idが空の場合、登録が出来ない登録できない" do
+      @donation_form.item_id = nil
+      @donation_form.valid?
     end
   end
 end
