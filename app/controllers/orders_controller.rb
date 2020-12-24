@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
     if @donation_form.valid?
       @donation_form.save
-      pay_items
+      pay_item
       redirect_to root_path
     else
       render :index
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:postal_code, :area_id, :city, :house_number, :building, :phone_number,:donation_id,:item_id, :token).merge(user_id: current_user.id)
+    params.permit(:postal_code, :area_id, :city, :house_number, :building, :phone_number,:donation_id,:item_id,:token).merge(user_id: current_user.id)
   end
 
   def set_item
