@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
 
   def edit
     if current_user.id != @item.user.id
-      render :show
+      redirect_to root_path
     end
   end
 
