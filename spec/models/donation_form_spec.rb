@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DonationForm, type: :model do
   before do
-    @user = FactoryBot.build(:user user.id)
-    @item = FactoryBot.build(:item item.id)
-    @donation_form = FactoryBot.build(:donation_form)
+    @donation_form = FactoryBot.build(:donation_form, user_id:@user.id, item_id: @item.id)
   end
 
 
@@ -89,11 +87,13 @@ RSpec.describe DonationForm, type: :model do
     it "user_idが空の場合、登録が出来ない登録できない" do
       @donation_form.user_id = nil
       @donation_form.valid?
+      expect(@donation_form.errors.full_messages).to include("User is out of setting range")
     end
 
     it "item_idが空の場合、登録が出来ない登録できない" do
       @donation_form.item_id = nil
       @donation_form.valid?
+      expect(@donation_form.errors.full_messages).to include("Item is out of setting range")
     end
   end
 end

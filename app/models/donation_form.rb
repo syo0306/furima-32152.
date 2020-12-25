@@ -9,7 +9,7 @@ class DonationForm
     validates :area_id, numericality: { other_than: 1 }
     validates :city
     validates :house_number
-    validates :phone_number, length: {maximum: 11, message: "is out of setting range"}
+    validates :phone_number, numericality: length: {maximum: 11, message: "is out of setting range"}
     validates :user_id
     validates :item_id
   end
