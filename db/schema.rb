@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2020_12_20_082641) do
   end
 
   create_table "donations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "item_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_donations_on_item_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_12_20_082641) do
     t.string "house_number", null: false
     t.string "building"
     t.string "phone_number", null: false
-    t.bigint "donation_id", null: false
+    t.bigint "donation_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["donation_id"], name: "index_orders_on_donation_id"

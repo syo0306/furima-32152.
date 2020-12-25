@@ -1,7 +1,7 @@
 class DonationForm
 
   include ActiveModel::Model
-  attr_accessor :postal_code, :area_id, :city, :house_number, :building, :phone_number, :user_id, :item_id, :token, :donation_id
+  attr_accessor :postal_code, :area_id, :city, :house_number, :building, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :token
@@ -18,7 +18,7 @@ class DonationForm
 
   def save
     donation = Donation.create(item_id: item_id, user_id: user_id)
-    Order.create(postal_code: postal_code, area_id: area_id, city: city, house_number: house_number,building: building, phone_number: phone_number, donation_id: donation.id)
+    Order.create!(postal_code: postal_code, area_id: area_id, city: city, house_number: house_number,building: building, phone_number: phone_number,donation_id: donation.id)
   end
 
 end
