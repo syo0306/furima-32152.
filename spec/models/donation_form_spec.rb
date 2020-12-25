@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DonationForm, type: :model do
   before do
+    @user = FactoryBot.build(:user user.id)
+    @item = FactoryBot.build(:item item.id)
     @donation_form = FactoryBot.build(:donation_form, user_id:@user.id, item_id: @item.id)
   end
 
@@ -80,6 +82,12 @@ RSpec.describe DonationForm, type: :model do
 
     it "電話番号が11桁以上であると登録できない" do
       @donation_form.phone_number = "123456789101"
+      @donation_form.valid?
+      expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
+    end
+
+    it "電話番号が英数混合では登録できないことであると登録できない" do
+      @donation_form.phone_number = "1a2d2344313"
       @donation_form.valid?
       expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
     end
