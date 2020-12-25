@@ -86,19 +86,19 @@ RSpec.describe DonationForm, type: :model do
       expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
     end
 
-    it "電話番号が英数混合では登録できないことであると登録できない" do
+    it "電話番号が英数混合では登録できない" do
       @donation_form.phone_number = "1a2d2344313"
       @donation_form.valid?
       expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
     end
 
-    it "user_idが空の場合、登録が出来ない登録できない" do
+    it "user_idが空の場合、登録が出来ない" do
       @donation_form.user_id = nil
       @donation_form.valid?
       expect(@donation_form.errors.full_messages).to include("User can't be blank")
     end
 
-    it "item_idが空の場合、登録が出来ない登録できない" do
+    it "item_idが空の場合、登録が出来ない" do
       @donation_form.item_id = nil
       @donation_form.valid?
       expect(@donation_form.errors.full_messages).to include("Item can't be blank")
