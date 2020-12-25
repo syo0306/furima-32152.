@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DonationForm, type: :model do
   before do
-    @user = FactoryBot.build(:user user.id)
-    @item = FactoryBot.build(:item item.id)
+    @user = FactoryBot.build(:user )
+    @item = FactoryBot.build(:item )
     @donation_form = FactoryBot.build(:donation_form, user_id:@user.id, item_id: @item.id)
   end
 
@@ -15,7 +15,7 @@ RSpec.describe DonationForm, type: :model do
       end	
 
       it "建物の情報が無くても保存できる" do
-        @donation_form. building = nil
+        @donation_form.building = nil
         expect(@donation_form).to be_valid
       end	
     end	
@@ -80,7 +80,7 @@ RSpec.describe DonationForm, type: :model do
       expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
     end
 
-    it "電話番号が11桁以上であると登録できない" do
+    it "電話番号が12桁以上であると登録できない" do
       @donation_form.phone_number = "123456789101"
       @donation_form.valid?
       expect(@donation_form.errors.full_messages).to include("Phone number is out of setting range")
@@ -95,13 +95,13 @@ RSpec.describe DonationForm, type: :model do
     it "user_idが空の場合、登録が出来ない登録できない" do
       @donation_form.user_id = nil
       @donation_form.valid?
-      expect(@donation_form.errors.full_messages).to include("User is out of setting range")
+      expect(@donation_form.errors.full_messages).to include("User can't be blank")
     end
 
     it "item_idが空の場合、登録が出来ない登録できない" do
       @donation_form.item_id = nil
       @donation_form.valid?
-      expect(@donation_form.errors.full_messages).to include("Item is out of setting range")
+      expect(@donation_form.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
