@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DonationForm, type: :model do
   before do
+    @user = FactoryBot.build(:user user.id)
+    @item = FactoryBot.build(:item item.id)
     @donation_form = FactoryBot.build(:donation_form)
   end
 
